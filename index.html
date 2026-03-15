@@ -679,9 +679,9 @@ function buildMapHtml(map,mode,imgUrl){
     +'<span class="mp-name">'+map+'</span>'
     +'<div style="display:flex;align-items:center;gap:8px;">'
     +'<span class="mp-mode-tag">'+mode+'</span>'+refreshBtn+'</div></div>';
-  var body=imgUrl
-    ?'<img src="'+imgUrl+'" alt="'+map+'" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=\\"map-no-img\\">Image unavailable — try Refresh</div>');">'
-    :'<div class="map-no-img">No image found — <button class="map-refresh-btn" style="margin-left:8px" onclick="refreshMapPreview()">&#8635; Retry</button></div>';
+  var body = imgUrl
+    ? `<img src="${imgUrl}" alt="${map}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<div class=\\'map-no-img\\'>Image unavailable — try Refresh</div>');">`
+    : `<div class="map-no-img">No image found — <button class="map-refresh-btn" style="margin-left:8px" onclick="refreshMapPreview()">&#8635; Retry</button></div>`;
   return header+body;
 }
 async function renderMapInPanel(map,mode){
