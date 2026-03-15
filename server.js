@@ -106,7 +106,7 @@ const server = http.createServer(async (req, res) => {
 
   // Serve frontend
   if (url.pathname === '/' || url.pathname === '/index.html') {
-    return serveStatic(res, path.join(__dirname, 'brawl-coach.html'));
+    return serveStatic(res, path.join(__dirname, 'index.html'));
   }
   const safePath = path.join(__dirname, url.pathname);
   if (safePath.startsWith(__dirname)) return serveStatic(res, safePath);
