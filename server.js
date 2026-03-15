@@ -132,13 +132,11 @@ const server = http.createServer(async (req, res) => {
   if (url.pathname === '/api/events' && req.method === 'GET') return handleEvents(res);
   if (url.pathname === '/api/brawlers' && req.method === 'GET') return handleBrawlers(res);
 
-  // Serve the frontend — matches both "/" and "/index.html" and "/Index.html"
+ // Serve the frontend
   if (url.pathname === '/' || url.pathname.toLowerCase() === '/index.html') {
-    // Try Index.html first (repo filename), then brawl-coach.html as fallback
-    const indexPath = path.join(__dirname, 'Index.html');
-    const fallbackPath = path.join(__dirname, 'brawl-coach.html');
-    if (fs.existsSync(indexPath)) return serveStatic(res, indexPath);
-    return serveStatic(res, fallbackPath);
+    if (fs.existsSync(path.join(__dirname, 'index.html'))) return serveStatic(res, path.join(__dirname, 'index.html'));
+    if (fs.existsSync(path.join(__dirname, 'Index.html'))) return serveStatic(res, path.join(__dirname, 'Index.html'));
+    return serveStatic(res, path.join(__dirname, 'brawl-coach.html'));
   }
 
   const safePath = path.join(__dirname, url.pathname);
