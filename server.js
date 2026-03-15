@@ -23,7 +23,7 @@ function normalizeTag(raw) {
 function brawlApiFetch(apiPath) {
   return new Promise((resolve, reject) => {
     const opts = {
-      hostname: 'api.brawlstars.com',
+      hostname: 'bsproxy.royaleapi.dev',
       path: apiPath,
       method: 'GET',
       headers: {
