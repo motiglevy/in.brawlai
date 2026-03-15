@@ -1,5 +1,5 @@
 {
-  "name": "in-brawl-coach",
+  "name": "in.brawlai",
   "version": "1.0.0",
   "description": "Brawl Stars Companion App",
   "main": "server.js",
