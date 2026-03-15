@@ -396,14 +396,26 @@ const MAP_IDS={"Hard Rock Mine":15000000,"Undermine":15000127,"Double Swoosh":15
 const MAPS_BY_MODE={"Gem Grab":["Hard Rock Mine","Undermine","Double Swoosh","Crystal Arcade","Deathcap Trap","Gem Fort","Last Stop","Acute Angle","Minecart Madness","Corner Case"],"Brawl Ball":["Backyard Bowl","Triple Dribble","Pinhole Punt","Sneaky Fields","Super Beach","Center Stage","Pinball Dreams","Beach Ball","Sunny Soccer","Penalty Kick","Field Goal","Second Try","Singed Earth","Sidetrack"],"Showdown":["Skull Creek","Feast or Famine","Cavern Churn","Stormy Plains","Island Invasion","Rockwall Brawl","Dark Passage","Acid Lakes","Scorched Stone","Double Trouble","Flying Fantasies","Safety Center","Dried Up River"],"Heist":["Safe Zone","Kaboom Canyon","Hot Potato","Bridge Too Far","Pit Stop","G.G. Mortuary"],"Bounty":["Layer Cake","Shooting Star","Canal Grande","Dry Season","Excel","Snake Prairie","Hideout"],"Hot Zone":["Dueling Beetles","Open Business","Ring of Fire","Parallel Plays","Split","Controller","Noisy Neighbours","Watersport"],"Knockout":["Goldarm Gulch","Belle's Rock","Flaring Phoenix","Out in the Open","New Horizons","Deeper Danger"],"Wipeout":["Shooting Star","Canal Grande","Dry Season","Layer Cake","Excel"],"Duels":["Infinite Doom","Mystic Touch","Brawler Haven","Clash Colosseum","Final Countdown"]};
 
 // Fetch the real-time map image URL from Brawlify API
-async function fetchLiveMapUrl(mapName){
+async function fetchLiveMapUrl(mapName, modeName){
   try{
     var r=await fetch('https://api.brawlapi.com/v1/maps',{signal:AbortSignal.timeout(8000)});
     if(!r.ok)throw new Error('API '+r.status);
     var d=await r.json();
     if(d&&d.list){
-      var norm=mapName.toLowerCase().trim();
-      var found=d.list.find(function(m){return m.name&&m.name.toLowerCase().trim()===norm;});
+      var normMap=mapName.toLowerCase().trim();
+      var normMode=modeName.toLowerCase().trim();
+      
+      // 1. Try to find an exact match for BOTH the map name AND the game mode
+      var found=d.list.find(function(m){
+        return m.name && m.name.toLowerCase().trim()===normMap && 
+               m.gameMode && m.gameMode.name && m.gameMode.name.toLowerCase().trim()===normMode;
+      });
+      
+      // 2. If no exact mode match, fallback to just matching the map name
+      if(!found){
+        found=d.list.find(function(m){return m.name&&m.name.toLowerCase().trim()===normMap;});
+      }
+      
       if(found&&found.imageUrl)return found.imageUrl;
     }
   }catch(e){}
@@ -688,11 +700,13 @@ async function renderMapInPanel(map,mode){
   var panel=document.getElementById('map-preview-panel');
   panel.innerHTML='<div class="map-no-img" style="flex-direction:column;gap:8px;">'
     +'<div class="spinner" style="width:20px;height:20px;margin:0;border-width:2px;"></div>Loading map...</div>';
-  var imgUrl=await fetchLiveMapUrl(map);
-  // Only update if still the same map (user might have changed selection)
+  
+  var imgUrl=await fetchLiveMapUrl(map, mode); // Now checks for the specific mode
+  
   var currentMap=document.getElementById('comp-map-select').value;
   if(currentMap===map)panel.innerHTML=buildMapHtml(map,mode,imgUrl);
 }
+
 async function refreshMapPreview(){
   var map=document.getElementById('comp-map-select').value;
   var mode=document.getElementById('comp-mode-select').value;
@@ -700,7 +714,14 @@ async function refreshMapPreview(){
   var panel=document.getElementById('map-preview-panel');
   panel.innerHTML='<div class="map-no-img" style="flex-direction:column;gap:8px;">'
     +'<div class="spinner" style="width:20px;height:20px;margin:0;border-width:2px;"></div>Refreshing...</div>';
-  var imgUrl=await fetchLiveMapUrl(map);
+  
+  var imgUrl=await fetchLiveMapUrl(map, mode);
+  
+  // Cache Buster: forces the browser to physically reload the image from the server
+  if(imgUrl){
+    imgUrl = imgUrl + "?t=" + new Date().getTime();
+  }
+  
   panel.innerHTML=buildMapHtml(map,mode,imgUrl);
 }
 function toggleMapPreview(){
