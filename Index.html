@@ -488,13 +488,40 @@ async function fetchPlayer(tag){
   try{const cached=localStorage.getItem(cacheKey);if(cached){const d=JSON.parse(cached);d.fromCache=true;return d;}}catch(e){}
   return null;
 }
-async function fetchRotation(){
-  try{const r=await fetch(`${PROXY_BASE}/api/events`,{signal:AbortSignal.timeout(10000)});
-  if(r.ok){const d=await r.json();try{localStorage.setItem('brawl_rotation',JSON.stringify(d));}catch(e){}return d;}}
-  catch(e){console.warn('Events API unreachable:',e.message);}
-  // Fall back to localStorage cache
-  try{const c=localStorage.getItem('brawl_rotation');if(c)return JSON.parse(c);}catch(e){}
-  return null;
+async function fetchRotation() {
+  try {
+    const r = await fetch(`${PROXY_BASE}/api/events`, {
+      signal: AbortSignal.timeout(10000),
+      cache: 'no-store'
+    });
+
+    if (!r.ok) throw new Error(`Rotation API failed: ${r.status}`);
+
+    const d = await r.json();
+
+    // Support both possible shapes:
+    // 1) API returns an array directly
+    // 2) API returns { items: [...] }
+    const events = Array.isArray(d) ? d : (Array.isArray(d.items) ? d.items : []);
+
+    // Keep cache only as emergency fallback, not as primary source
+    try {
+      localStorage.setItem('brawl_rotation', JSON.stringify(events));
+      sessionStorage.setItem('rotation_fetched_this_session', '1');
+    } catch (e) {}
+
+    return events;
+  } catch (e) {
+    console.warn('Live rotation fetch failed:', e.message);
+
+    // Only fallback if live fetch fails
+    try {
+      const cached = localStorage.getItem('brawl_rotation');
+      if (cached) return JSON.parse(cached);
+    } catch (e) {}
+
+    return null;
+  }
 }
 
 function validateTag(raw){let t=raw.trim().toUpperCase().replace(/\s/g,'');if(!t)return null;if(t.startsWith('#'))t=t.slice(1);if(!/^[0-9A-Z]{5,12}$/.test(t))return null;return t;}
