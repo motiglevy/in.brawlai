@@ -171,8 +171,17 @@ input,select{font-family:inherit}
 .refresh-btn{display:flex;align-items:center;gap:5px;background:none;border:none;color:var(--text3);font-size:12px;font-weight:600;cursor:pointer;transition:0.2s;padding:4px 8px;border-radius:8px;}
 .refresh-btn:hover{color:var(--text);background:rgba(255,255,255,0.05);}
 .refresh-btn svg{width:14px;height:14px;}
-.rotation-list{display:flex;flex-direction:column;gap:12px;}
-.rot-card{background:linear-gradient(145deg,var(--bg2),var(--bg3));border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,0.05);transition:0.2s;}
+.rotation-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+@media (min-width: 700px) {
+  .rotation-list{
+    grid-template-columns:1fr 1fr;
+  }
+}.rot-card{background:linear-gradient(145deg,var(--bg2),var(--bg3));border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,0.05);transition:0.2s;}
 .rot-card-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
 .rot-mode-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .rot-mode-icon svg{width:20px;height:20px;}
@@ -563,15 +572,84 @@ async function loadRotation(){
   const data=await fetchRotation();
   if(data&&Array.isArray(data)&&data.length>0){renderRotationFromAPI(data);}else{renderFallbackRotation();}
 }
-function renderRotationFromAPI(events){
-  const el=document.getElementById('rotation-list');const now=new Date();
-  el.innerHTML=events.map(ev=>{
-    const mode=ev.event?.mode||'Unknown';const mapName=ev.event?.map||'Unknown Map';
-    const displayMode=mode.replace(/([A-Z])/g,' $1').replace(/^./,s=>s.toUpperCase()).trim().replace('Solo Showdown','Showdown').replace('Gem Grab','Gem Grab').replace('Brawl Ball','Brawl Ball').replace('Hot Zone','Hot Zone');
-    let timeLeft='';
-    if(ev.endTime){const end=new Date(ev.endTime.replace(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,'$1-$2-$3T$4:$5:$6'));const diff=end-now;if(diff>0){const hours=Math.floor(diff/3600000);timeLeft=hours>0?`${hours}h`:`${Math.floor(diff/60000)}m`;}}
-    const ms=MODE_STYLES[displayMode]||MODE_STYLES['Gem Grab'];const topPicks=getTopPicksForMode(displayMode);
-    return `<div class="rot-card"><div class="rot-card-top"><div class="rot-mode-icon" style="background:${ms.bg};color:${ms.color}">${ms.icon}</div><div class="rot-card-info"><div class="rot-card-mode">${displayMode}</div><div class="rot-card-map">${mapName}</div></div>${timeLeft?`<div class="rot-time-badge" style="background:rgba(16,185,129,0.15);color:var(--green)">${timeLeft}</div>`:''}</div><div class="rot-picks-label">TOP PICKS</div><div class="rot-picks-row">${topPicks}</div></div>`;
+function renderRotationFromAPI(events) {
+  const el = document.getElementById('rotation-list');
+  const now = new Date();
+
+  if (!Array.isArray(events) || events.length === 0) {
+    renderFallbackRotation();
+    return;
+  }
+
+  const normalized = events
+    .map(ev => {
+      const rawMode = ev.event?.mode || ev.mode || 'Unknown';
+      const rawMap = ev.event?.map || ev.map || 'Unknown Map';
+
+      const displayMode = rawMode
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, s => s.toUpperCase())
+        .trim()
+        .replace('Solo Showdown', 'Showdown');
+
+      return {
+        ...ev,
+        displayMode,
+        mapName: rawMap
+      };
+    })
+    .filter(ev => ev.displayMode !== 'Unknown' && ev.mapName !== 'Unknown Map');
+
+  // Remove duplicates if API returns repeated mode/map entries
+  const seen = new Set();
+  const uniqueEvents = normalized.filter(ev => {
+    const key = `${ev.displayMode}__${ev.mapName}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  // Optional: sort alphabetically by mode for stable display
+  uniqueEvents.sort((a, b) => a.displayMode.localeCompare(b.displayMode));
+
+  el.innerHTML = uniqueEvents.map(ev => {
+    let timeLeft = '';
+
+    if (ev.endTime) {
+      const end = new Date(
+        ev.endTime.replace(
+          /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,
+          '$1-$2-$3T$4:$5:$6'
+        )
+      );
+
+      const diff = end - now;
+
+      if (diff > 0) {
+        const hours = Math.floor(diff / 3600000);
+        timeLeft = hours > 0 ? `${hours}h` : `${Math.floor(diff / 60000)}m`;
+      }
+    }
+
+    const ms = MODE_STYLES[ev.displayMode] || MODE_STYLES['Gem Grab'];
+    const topPicks = getTopPicksForMode(ev.displayMode);
+
+    return `
+      <div class="rot-card">
+        <div class="rot-card-top">
+          <div class="rot-mode-icon" style="background:${ms.bg};color:${ms.color}">
+            ${ms.icon}
+          </div>
+          <div class="rot-card-info">
+            <div class="rot-card-mode">${ev.displayMode}</div>
+            <div class="rot-card-map">${ev.mapName}</div>
+          </div>
+          ${timeLeft ? `<div class="rot-time-badge" style="background:rgba(16,185,129,0.15);color:var(--green)">${timeLeft}</div>` : ''}
+        </div>
+        <div class="rot-picks-label">TOP PICKS</div>
+        <div class="rot-picks-row">${topPicks}</div>
+      </div>
+    `;
   }).join('');
 }
 function renderFallbackRotation(){
@@ -831,19 +909,51 @@ function buildProPage(){document.getElementById('pro-content').innerHTML=PRO_DAT
 document.getElementById('login-tag-input').addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
 document.getElementById('tag-input').addEventListener('keydown',e=>{if(e.key==='Enter')connectProfile();});
 
-window.onload=async function(){
-  let storedTag=null;try{storedTag=localStorage.getItem('brawl_tag');}catch(e){}
-  if(storedTag){
-    document.getElementById('login-page').style.display='none';document.getElementById('main-app').style.display='block';
-    playerData=getSamplePlayer();isSampleData=true;initApp(true);
-    const data=await fetchPlayer(storedTag);
-    if(data){playerData=data;isSampleData=false;savedTag=storedTag;document.getElementById('header-player-name').textContent=data.name;document.getElementById('header-connect-btn').style.display='none';document.getElementById('signout-btn').style.display='inline-block';initApp(true);}
-    else{
-      // No live data — check if we got cached data from fetchPlayer
-      document.getElementById('header-player-name').textContent=playerData&&!playerData.isSample?playerData.name:'Guest';
-      document.getElementById('header-connect-btn').style.display=playerData&&!playerData.isSample?'none':'inline-block';
-      document.getElementById('signout-btn').style.display=playerData&&!playerData.isSample?'inline-block':'none';
+window.onload = async function () {
+  let storedTag = null;
+
+  try {
+    storedTag = localStorage.getItem('brawl_tag');
+  } catch (e) {}
+
+  if (storedTag) {
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementById('main-app').style.display = 'block';
+
+    playerData = getSamplePlayer();
+    isSampleData = true;
+    initApp(true);
+
+    const data = await fetchPlayer(storedTag);
+
+    if (data) {
+      playerData = data;
+      isSampleData = false;
+      savedTag = storedTag;
+
+      document.getElementById('header-player-name').textContent = data.name;
+      document.getElementById('header-connect-btn').style.display = 'none';
+      document.getElementById('signout-btn').style.display = 'inline-block';
+
+      initApp(true);
+    } else {
+      document.getElementById('header-player-name').textContent =
+        playerData && !playerData.isSample ? playerData.name : 'Guest';
+
+      document.getElementById('header-connect-btn').style.display =
+        playerData && !playerData.isSample ? 'none' : 'inline-block';
+
+      document.getElementById('signout-btn').style.display =
+        playerData && !playerData.isSample ? 'inline-block' : 'none';
     }
+
+    // Always fetch fresh rotation when app opens
+    await loadRotation();
+  } else {
+    document.getElementById('login-page').style.display = 'flex';
+    document.getElementById('main-app').style.display = 'none';
+  }
+};
     loadRotation();
   }else{document.getElementById('login-page').style.display='flex';document.getElementById('main-app').style.display='none';}
 };
