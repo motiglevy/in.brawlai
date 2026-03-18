@@ -538,7 +538,7 @@ async function loadRotation(){
 }
 function renderRotationFromAPI(events){
   const el=document.getElementById('rotation-list');const now=new Date();
-  el.innerHTML=events.slice(0,6).map(ev=>{
+  el.innerHTML=events.map(ev=>{
     const mode=ev.event?.mode||'Unknown';const mapName=ev.event?.map||'Unknown Map';
     const displayMode=mode.replace(/([A-Z])/g,' $1').replace(/^./,s=>s.toUpperCase()).trim().replace('Solo Showdown','Showdown').replace('Gem Grab','Gem Grab').replace('Brawl Ball','Brawl Ball').replace('Hot Zone','Hot Zone');
     let timeLeft='';
