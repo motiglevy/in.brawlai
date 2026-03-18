@@ -274,8 +274,8 @@ input,select{font-family:inherit}
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile
       </button>
       <button class="nav-btn" data-page="brawlers" onclick="go('brawlers')">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Analyzer
-      </button>
+  <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Brawler Analyzer
+</button>
       <button class="nav-btn" data-page="pairs" onclick="go('pairs')">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Team Comps
       </button>
@@ -382,8 +382,18 @@ input,select{font-family:inherit}
   </div>
 </div>
 <script>
-const BRAWLER_COLORS={"Shelly":"#e88a5a","Nita":"#d45b5b","Colt":"#4b9cd4","Bull":"#c55a3e","Brock":"#e8c248","El Primo":"#4caf50","Barley":"#a855f7","Poco":"#06b6d4","Rosa":"#22c55e","Jessie":"#f97316","Dynamike":"#ef4444","Tick":"#3b82f6","8-Bit":"#8b5cf6","Rico":"#ec4899","Penny":"#f59e0b","Darryl":"#6b7280","Carl":"#a3e635","Piper":"#f0abfc","Pam":"#f472b6","Frank":"#78716c","Bibi":"#f43f5e","Bea":"#facc15","Edgar":"#7c3aed","Griff":"#d97706","Grom":"#64748b","Bonnie":"#e879f9","Gale":"#38bdf8","Colette":"#c084fc","Belle":"#fbbf24","Ash":"#a8a29e","Leon":"#34d399","Spike":"#4ade80","Crow":"#334155","Sandy":"#fde068","Amber":"#ea580c","Meg":"#818cf8","Surge":"#22d3ee","Lou":"#bae6fd","Byron":"#8b5cf6","Squeak":"#86efac","Buzz":"#f97316","Fang":"#dc2626","Eve":"#fda4af","Janet":"#e879f9","Otis":"#6366f1","Sam":"#b91c1c","Gus":"#c4b5fd","Buster":"#3b82f6","Chester":"#facc15","Gray":"#94a3b8","Mandy":"#f9a8d4","R-T":"#60a5fa","Willow":"#a78bfa","Doug":"#fb923c","Chuck":"#dc2626","Charlie":"#7c3aed","Mico":"#a3e635","Melodie":"#f472b6","Lily":"#e879f9","Angelo":"#fde068","Berry":"#818cf8","Shade":"#475569","Draco":"#ef4444","Kenji":"#dc2626","Juju":"#c084fc","Moe":"#64748b","Clancy":"#ef4444","Tara":"#9333ea","Mortis":"#7c3aed","Gene":"#3b82f6","Mr. P":"#60a5fa","Max":"#facc15","Sprout":"#4ade80","Nani":"#f472b6","Emz":"#c084fc","Stu":"#f97316","Ruffs":"#d97706","Lola":"#ec4899","Pierce":"#10b981","Sirius":"#4c1d95","Cordelius":"#7c2d12","Glowy":"#fef08a","Hank":"#60a5fa","Kit":"#fca5a5","Larry & Lawrie":"#6ee7b7","Maisie":"#c084fc","Pearl":"#fb7185","Bo":"#a3e635","Jacky":"#facc15","Finx":"#a855f7","Gigi":"#ec4899","Ziggy":"#3b82f6","Ollie":"#10b981"};
-
+..."Jacky":"#facc15",
+"Finx":"#a855f7",
+"Gigi":"#ec4899",
+"Ziggy":"#3b82f6",
+"Ollie":"#10b981",
+"Meeple":"#f59e0b",
+"Jae-Yong":"#22c55e",
+"Kaze":"#06b6d4",
+"Alli":"#84cc16",
+"Trunk":"#b45309",
+"Mina":"#14b8a6",
+"Najia":"#7c3aed"};
 const PLAY_STYLES={Aggressive:{color:"#ef4444",bg:"rgba(239,68,68,0.15)"},Sniper:{color:"#3b82f6",bg:"rgba(59,130,246,0.15)"},Support:{color:"#10b981",bg:"rgba(16,185,129,0.15)"},Thrower:{color:"#f97316",bg:"rgba(249,115,22,0.15)"},Controller:{color:"#a855f7",bg:"rgba(168,85,247,0.15)"},Tank:{color:"#78716c",bg:"rgba(120,113,108,0.2)"},Assassin:{color:"#7c3aed",bg:"rgba(124,58,237,0.15)"},Hybrid:{color:"#06b6d4",bg:"rgba(6,182,212,0.15)"}};
 const RANGE_STYLES={Close:{color:"#f43f5e",bg:"rgba(244,63,94,0.15)"},Mid:{color:"#3b82f6",bg:"rgba(59,130,246,0.15)"},Long:{color:"#8b5cf6",bg:"rgba(139,92,246,0.15)"}};
 
