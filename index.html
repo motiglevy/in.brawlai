@@ -748,7 +748,7 @@ async function fetchBattleLog(tag){
       const bt=item.battleTime;
       if(!bt) continue;
       // battleTime format: "20260322T143052.000Z" → parse to Date
-      const ts=bt.replace(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,'$1-$2-$3T$4:$5:$6z');
+      const ts=bt.replace(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,'$1-$2-$3T$4:$5:$6Z');
       const time=new Date(ts);
       if(isNaN(time.getTime())) continue;
       // Sum trophyChange across all players entries for this user
