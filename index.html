@@ -236,19 +236,60 @@ input,select{font-family:inherit}
 .ability-text{color:var(--text3);word-break:break-word;}
 .ability-text strong{color:var(--text2);font-weight:700;}
 /* ── Light Mode ── */
-body.light{--bg:#f0f4ff;--bg2:#ffffff;--bg3:#e8ecf8;--bg4:#d0d8f0;--text:#1e1b4b;--text2:#4c4799;--text3:#6b7280;--accent:#7c3aed;}
-body.light .header{background:var(--bg);border-bottom:1px solid rgba(0,0,0,0.07);}
-body.light .card,body.light .login-card,body.light .comp-card,body.light .rot-card,body.light .pro-card,body.light .daily-quiz,body.light .analyzer-card{background:linear-gradient(145deg,#fff,#eef2ff);border-color:rgba(0,0,0,0.06);}
-body.light .btn-secondary{background:#e8ecf8;color:#1e1b4b;border-color:#d0d8f0;}
-body.light select,body.light input,body.light .login-input,body.light .search-wrap input{background:#fff;color:#1e1b4b;border-color:#d0d8f0;}
-body.light .nav-btn{color:#4c4799;}body.light .nav-btn:hover{background:rgba(124,58,237,0.08);}
-body.light .nav-btn.active{background:rgba(124,58,237,0.12);color:var(--accent);}
-body.light .tab{background:#e8ecf8;color:#4c4799;border-color:#d0d8f0;}
-body.light .modal{background:#fff;}body.light .rank-list .rank-item{background:#eef2ff;}
-body.light .stat-box{background:linear-gradient(145deg,#fff,#eef2ff);}
-body.light .comp-strategy-panel{background:#eef2ff;}body.light .map-preview-panel{background:#fff;}
-body.light .comp-brawler-slot{background:#eef2ff;border-color:rgba(0,0,0,0.05);}
-body.light .qa-card{background:linear-gradient(145deg,#fff,#eef2ff);border-color:rgba(0,0,0,0.06);}
+body.light{
+  --bg:#dde1ea;--bg2:#e8ecf2;--bg3:#d0d4de;--bg4:#bcc2ce;
+  --text:#0f0f1a;--text2:#2d2d4a;--text3:#4a4a6a;
+  --accent:#6d28d9;--accent2:#4f46e5;--green:#047857;--red:#b91c1c;
+  --orange:#c2410c;--cyan:#0e7490;--purple:#7e22ce;
+}
+body.light body{background:var(--bg);color:var(--text);}
+body.light .header{background:#c8cdd8;border-bottom:1px solid rgba(0,0,0,0.12);}
+body.light .logo,body.light .logo span{color:var(--text)!important;}
+body.light .card,body.light .login-card,body.light .comp-card,body.light .rot-card,body.light .pro-card,body.light .daily-quiz{background:linear-gradient(145deg,#e8ecf2,#d8dce8);border:1px solid rgba(0,0,0,0.1);}
+body.light .analyzer-card{background:#e0e4ee;border:1px solid rgba(0,0,0,0.08);}
+body.light .analyzer-card:hover{background:#d4d8e6;border-color:rgba(109,40,217,0.4);}
+body.light .analyzer-name{color:#0f0f1a;}
+body.light .btn-primary{background:linear-gradient(135deg,#6d28d9,#4f46e5);color:#fff;}
+body.light .btn-secondary{background:#d0d4de;color:#0f0f1a;border:1px solid #bcc2ce;}
+body.light select,body.light input,body.light .login-input,body.light .search-wrap input{background:#e8ecf2;color:#0f0f1a;border-color:#bcc2ce;}
+body.light select option{background:#e8ecf2;color:#0f0f1a;}
+body.light .nav-btn{color:#2d2d4a;}
+body.light .nav-btn:hover{color:#0f0f1a;background:rgba(0,0,0,0.06);}
+body.light .nav-btn.active{background:rgba(109,40,217,0.14);color:var(--accent);}
+body.light .tab{background:#d0d4de;color:#2d2d4a;border-color:#bcc2ce;}
+body.light .tab.active{background:var(--accent);color:#fff;}
+body.light .modal{background:#e8ecf2;}
+body.light .modal-close-btn{background:#d0d4de;color:#2d2d4a;}
+body.light .rank-list .rank-item{background:#d8dce8;border:1px solid rgba(0,0,0,0.07);}
+body.light .stat-box{background:linear-gradient(145deg,#e8ecf2,#d8dce8);border:1px solid rgba(0,0,0,0.08);}
+body.light .stat-box .lbl{color:#4a4a6a;}
+body.light .comp-strategy-panel{background:#d4d8e6;border-top:1px solid rgba(0,0,0,0.1);}
+body.light .comp-strategy-panel p{color:#2d2d4a;}
+body.light .map-preview-panel{background:#e8ecf2;}
+body.light .comp-brawler-slot{background:#d8dce8;border:1px solid rgba(0,0,0,0.08);}
+body.light .comp-brawler-name{color:#0f0f1a!important;}
+body.light .ability-text{color:#4a4a6a;}
+body.light .ability-text strong{color:#2d2d4a;}
+body.light .qa-card{background:linear-gradient(145deg,#e8ecf2,#d8dce8);border:1px solid rgba(0,0,0,0.08);}
+body.light .qa-title{color:#0f0f1a;}
+body.light .qa-desc{color:#4a4a6a;}
+body.light .rot-card-mode{color:#0f0f1a!important;}
+body.light .rot-card-map{color:#4a4a6a!important;}
+body.light .rot-pick-name{color:#0f0f1a!important;}
+body.light .rot-pick-wr{color:#4a4a6a!important;}
+body.light .rot-picks-label{color:#4a4a6a!important;}
+body.light .card-title{color:var(--accent);}
+body.light .pro-card{background:linear-gradient(145deg,#e4e8f0,#d4d8e4);border:1px solid rgba(0,0,0,0.09);}
+body.light .pro-name{color:#0f0f1a;}
+body.light .pro-platform{color:#4a4a6a;}
+body.light .pro-tip{color:#2d2d4a;border-bottom-color:#bcc2ce;}
+body.light .modal-section-title{color:#4a4a6a;}
+body.light .dq-question{color:#0f0f1a!important;}
+body.light .dq-option{background:#d0d4de;border-color:#bcc2ce;color:#0f0f1a;}
+body.light .dq-option:hover{background:#c4c8d4;border-color:var(--accent);}
+body.light .welcome-name,body.light .welcome-tag{color:#0f0f1a!important;}
+body.light .page-title{color:#0f0f1a;}
+body.light h2,body.light h3{color:#0f0f1a;}
 /* Theme toggle */
 .theme-toggle{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:1px solid var(--bg4);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:0.2s;flex-shrink:0;font-size:16px;line-height:1;}
 .theme-toggle:hover{background:var(--bg4);color:var(--text);}
@@ -828,51 +869,52 @@ const DAILY_QUIZ_POOL=[
 ];
 
 // ─── Brawler Abilities (Star Powers / Gadgets / Gears) ───
+// sp = best star power, gadget = best gadget for competitive meta
 const BRAWLER_ABILITIES={
-  'Sandy':    {sp:['Healing Winds','Rude Sands'],gadgets:['Speed Zone','Sticky Sand'],gear:'Speed · Shield'},
-  'Gene':     {sp:['Magical Retreat','Spirit Slap'],gadgets:['Vengeful Spirits','Light Snare'],gear:'Speed · Shield'},
-  'Byron':    {sp:['Injection','Medicated'],gadgets:['Screeching Solo','Multi Vitamin'],gear:'Speed · Gadget Charge'},
-  'Rosa':     {sp:['Plant Life','Thorny Gloves'],gadgets:['Unfriendly Bushes','Hard Adrenal'],gear:'Shield · Gadget Charge'},
-  'Spike':    {sp:['Fertilize','Curveball'],gadgets:['Popping Pincushion','Life Plant'],gear:'Speed · Shield'},
-  'Belle':    {sp:['Hook & Bullet','Positive Feedback'],gadgets:['Nest Egg','Bullet Sketcher'],gear:'Speed · Gadget Charge'},
-  'Piper':    {sp:['Snappy Sniping','Ambush'],gadgets:['Auto Aimer','Homemade Recipe'],gear:'Speed · Gadget Charge'},
-  'Poco':     {sp:['Da Capo!','Screeching Solo'],gadgets:['Tuning Fork','Protective Tunes'],gear:'Health · Gadget Charge'},
-  'Max':      {sp:['Super Charged','Comet Candy'],gadgets:['Phase Shifter','Sneaky Sneakers'],gear:'Speed · Gadget Charge'},
-  'Bibi':     {sp:['Home Run','Batting Stance'],gadgets:['Vitamin Booster','Stun Splash'],gear:'Speed · Shield'},
-  'El Primo': {sp:['El Fuego','Meteor Rush'],gadgets:['Suplex Supplement','Asteroid Belt'],gear:'Health · Shield'},
-  'Gale':     {sp:['Blustery Bow','Freezing Snow'],gadgets:['Spring Ejector','Twister'],gear:'Speed · Gadget Charge'},
-  'Mortis':   {sp:['Creep Harvest','Coiled Snake'],gadgets:['Survival Shovel','Combo Spinner'],gear:'Speed · Shield'},
-  'Frank':    {sp:['Power Grab','Sponge'],gadgets:['Active Noise Canceling','Irresistible Attraction'],gear:'Health · Shield'},
-  'Emz':      {sp:['Bad Karma','Hype'],gadgets:['De-Hype','Friendzoner'],gear:'Speed · Gadget Charge'},
-  'Leon':     {sp:['Smoke Trails','Invisiheal'],gadgets:['Clone Projector','Lollipop Drop'],gear:'Speed · Shield'},
-  'Crow':     {sp:['Extra Toxic','Carrion Crow'],gadgets:['Defence Booster','Slowing Toxin'],gear:'Speed · Gadget Charge'},
-  'Shelly':   {sp:['Shell Shock','Band-Aid'],gadgets:['Clay Pigeons','Fast Forward'],gear:'Speed · Shield'},
-  'Bull':     {sp:['Berserker','Tough Guy'],gadgets:['T-Bone Injector','Counter Crush'],gear:'Health · Gadget Charge'},
-  'Darryl':   {sp:['Steel Hoops','Rolling Reload'],gadgets:['Tar Barrel','Recoiling Rotator'],gear:'Health · Shield'},
-  'Brock':    {sp:['Incendiary','Rocket No. Four'],gadgets:['Rocket Fuel','Rocket Laces'],gear:'Speed · Gadget Charge'},
-  'Pam':      {sp:["Mama's Hug",'Scrapsucker'],gadgets:['Pulse Modulator','Shake It Up'],gear:'Health · Gadget Charge'},
-  'Jessie':   {sp:['Energize','Shocky'],gadgets:['Recoil Spring','Spark Plug'],gear:'Speed · Gadget Charge'},
-  '8-Bit':    {sp:['Boosted Booster','Plugged In'],gadgets:['Cheat Cartridge','Extra Credits'],gear:'Shield · Gadget Charge'},
-  'Nita':     {sp:['Bear With Me','Hyper Bear'],gadgets:['Bear Paws','Fake Nita Spirit'],gear:'Speed · Gadget Charge'},
-  'Lou':      {sp:['Hypothermia','Mind Freeze'],gadgets:['Ice Block','Cryo Shield'],gear:'Speed · Shield'},
-  'Barley':   {sp:['Medical Use','Extra Nails'],gadgets:['Satchel Charge','Sticky Syrup Mixer'],gear:'Speed · Gadget Charge'},
-  'Fang':     {sp:['Fresh Kicks','Divine Soles'],gadgets:['Roundhouse Kick','Shuffling Feet'],gear:'Speed · Shield'},
-  'Melodie':  {sp:['Greatest Hits','Rhythm & Bass'],gadgets:['Interlude','Metronome'],gear:'Speed · Shield'},
-  'Edgar':    {sp:['Fisticuffs','Hard Landing'],gadgets:["Let's Fly",'Hardcore'],gear:'Speed · Shield'},
-  'Bea':      {sp:['Honey Coat','Insta Beeload'],gadgets:['Rattled Hive','Honey Molasses'],gear:'Speed · Gadget Charge'},
-  'Tick':     {sp:['Well Oiled','Automa-Tick Protection'],gadgets:['Backup Mine','Snare a Bear'],gear:'Speed · Gadget Charge'},
-  'Penny':    {sp:['Last Blast','Master Blaster'],gadgets:['Pocket Detonator','Balls of Fire'],gear:'Speed · Gadget Charge'},
-  'Tara':     {sp:['Black Portal','Healing Shade'],gadgets:['Psychic Enhancer','Share the Pain'],gear:'Speed · Gadget Charge'},
-  'Bo':       {sp:['Circling Eagle','Snare a Bear'],gadgets:['Super Totem','Catch a Snake'],gear:'Speed · Gadget Charge'},
-  'Dynamike': {sp:['Dyna-Jump','Demolition'],gadgets:['Satchel Charge','Fidget Spinner'],gear:'Speed · Gadget Charge'},
+  'Sandy':    {sp:'Healing Winds',   gadget:'Speed Zone',              gear:'Speed · Shield'},
+  'Gene':     {sp:'Magical Retreat', gadget:'Vengeful Spirits',        gear:'Speed · Shield'},
+  'Byron':    {sp:'Injection',       gadget:'Multi Vitamin',           gear:'Speed · Gadget Charge'},
+  'Rosa':     {sp:'Plant Life',      gadget:'Unfriendly Bushes',       gear:'Shield · Gadget Charge'},
+  'Spike':    {sp:'Fertilize',       gadget:'Life Plant',              gear:'Speed · Shield'},
+  'Belle':    {sp:'Positive Feedback',gadget:'Nest Egg',              gear:'Speed · Gadget Charge'},
+  'Piper':    {sp:'Ambush',          gadget:'Homemade Recipe',         gear:'Speed · Gadget Charge'},
+  'Poco':     {sp:'Da Capo!',        gadget:'Protective Tunes',        gear:'Health · Gadget Charge'},
+  'Max':      {sp:'Super Charged',   gadget:'Phase Shifter',           gear:'Speed · Gadget Charge'},
+  'Bibi':     {sp:'Home Run',        gadget:'Vitamin Booster',         gear:'Speed · Shield'},
+  'El Primo': {sp:'El Fuego',        gadget:'Asteroid Belt',           gear:'Health · Shield'},
+  'Gale':     {sp:'Blustery Bow',    gadget:'Spring Ejector',          gear:'Speed · Gadget Charge'},
+  'Mortis':   {sp:'Creep Harvest',   gadget:'Combo Spinner',           gear:'Speed · Shield'},
+  'Frank':    {sp:'Sponge',          gadget:'Active Noise Canceling',  gear:'Health · Shield'},
+  'Emz':      {sp:'Bad Karma',       gadget:'Friendzoner',             gear:'Speed · Gadget Charge'},
+  'Leon':     {sp:'Smoke Trails',    gadget:'Lollipop Drop',           gear:'Speed · Shield'},
+  'Crow':     {sp:'Carrion Crow',    gadget:'Slowing Toxin',           gear:'Speed · Gadget Charge'},
+  'Shelly':   {sp:'Band-Aid',        gadget:'Fast Forward',            gear:'Speed · Shield'},
+  'Bull':     {sp:'Tough Guy',       gadget:'T-Bone Injector',         gear:'Health · Gadget Charge'},
+  'Darryl':   {sp:'Rolling Reload',  gadget:'Recoiling Rotator',       gear:'Health · Shield'},
+  'Brock':    {sp:'Incendiary',      gadget:'Rocket Laces',            gear:'Speed · Gadget Charge'},
+  'Pam':      {sp:"Mama's Hug",      gadget:'Pulse Modulator',         gear:'Health · Gadget Charge'},
+  'Jessie':   {sp:'Energize',        gadget:'Spark Plug',              gear:'Speed · Gadget Charge'},
+  '8-Bit':    {sp:'Boosted Booster', gadget:'Extra Credits',           gear:'Shield · Gadget Charge'},
+  'Nita':     {sp:'Hyper Bear',      gadget:'Bear Paws',               gear:'Speed · Gadget Charge'},
+  'Lou':      {sp:'Hypothermia',     gadget:'Ice Block',               gear:'Speed · Shield'},
+  'Barley':   {sp:'Medical Use',     gadget:'Satchel Charge',          gear:'Speed · Gadget Charge'},
+  'Fang':     {sp:'Fresh Kicks',     gadget:'Roundhouse Kick',         gear:'Speed · Shield'},
+  'Melodie':  {sp:'Greatest Hits',   gadget:'Interlude',               gear:'Speed · Shield'},
+  'Edgar':    {sp:'Hard Landing',    gadget:"Let's Fly",               gear:'Speed · Shield'},
+  'Bea':      {sp:'Honey Coat',      gadget:'Rattled Hive',            gear:'Speed · Gadget Charge'},
+  'Tick':     {sp:'Well Oiled',      gadget:'Backup Mine',             gear:'Speed · Gadget Charge'},
+  'Penny':    {sp:'Master Blaster',  gadget:'Pocket Detonator',        gear:'Speed · Gadget Charge'},
+  'Tara':     {sp:'Black Portal',    gadget:'Psychic Enhancer',        gear:'Speed · Gadget Charge'},
+  'Bo':       {sp:'Snare a Bear',    gadget:'Super Totem',             gear:'Speed · Gadget Charge'},
+  'Dynamike': {sp:'Dyna-Jump',       gadget:'Fidget Spinner',          gear:'Speed · Gadget Charge'},
 };
 function getBrawlerAbilitiesHtml(name){
   const a=BRAWLER_ABILITIES[name];
-  if(!a)return `<div class="comp-brawler-abilities"><div class="ability-row"><span class="ability-icon">⚔️</span><span class="ability-text"><strong>Role:</strong> ${name}</span></div></div>`;
+  if(!a)return '';
   return `<div class="comp-brawler-abilities">`
-    +`<div class="ability-row"><span class="ability-icon">⭐</span><span class="ability-text"><strong>${a.sp[0]}</strong> · ${a.sp[1]}</span></div>`
-    +`<div class="ability-row"><span class="ability-icon">🔧</span><span class="ability-text"><strong>${a.gadgets[0]}</strong> · ${a.gadgets[1]}</span></div>`
-    +`<div class="ability-row"><span class="ability-icon">⚙️</span><span class="ability-text"><strong>Gears:</strong> ${a.gear}</span></div>`
+    +`<div class="ability-row"><span class="ability-icon">⭐</span><span class="ability-text">${a.sp}</span></div>`
+    +`<div class="ability-row"><span class="ability-icon">🔧</span><span class="ability-text">${a.gadget}</span></div>`
+    +`<div class="ability-row"><span class="ability-icon">⚙️</span><span class="ability-text">${a.gear}</span></div>`
     +`</div>`;
 }
 // ─── Theme Toggle ───
