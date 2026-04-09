@@ -109,7 +109,10 @@ async function saveBattles(playerTag, battles) {
         battle.result     || null,
         brawler.name      || null,
         brawler.power     || null,
-        battle.trophyChange !== undefined ? battle.trophyChange : null,
+        // Battle-level trophyChange first; fall back to player-level (Showdown etc.)
+        battle.trophyChange !== undefined
+          ? battle.trophyChange
+          : (self?.trophyChange !== undefined ? self.trophyChange : null),
         JSON.stringify(b),
       ]);
 

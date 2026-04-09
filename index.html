@@ -149,7 +149,7 @@ input,select{font-family:inherit}
 .mode-pill{display:flex;align-items:center;gap:8px;background:var(--bg3);border-radius:10px;padding:9px 12px;margin-bottom:6px;border:1px solid rgba(255,255,255,0.04);}
 .mode-pill-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .mode-pill-icon svg{width:14px;height:14px;}
-.mode-pill-name{font-size:13px;font-weight:700;color:#fff;}
+.mode-pill-name{font-size:13px;font-weight:700;color:var(--text);}
 .your-stats-box{background:linear-gradient(145deg,rgba(16,185,129,0.08),rgba(16,185,129,0.03));border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius2);padding:14px 16px;}
 .your-stats-header{display:flex;align-items:center;gap:6px;margin-bottom:12px;}
 .your-stats-header svg{width:14px;height:14px;color:var(--green);}
@@ -180,10 +180,10 @@ input,select{font-family:inherit}
 .qa-card:hover{border-color:rgba(139,92,246,0.3);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2);}
 .qa-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent);}
 .qa-icon svg{width:24px;height:24px;}
-.qa-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+.qa-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .qa-desc{font-size:11px;color:var(--text3);line-height:1.4;}
 .rotation-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
-.rotation-header-left h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:2px;}
+.rotation-header-left h3{font-size:20px;font-weight:800;color:var(--text);margin-bottom:2px;}
 .rotation-header-left p{font-size:13px;color:var(--text3);}
 .rotation-header-right{display:flex;align-items:center;gap:12px;margin-top:4px;}
 .refresh-btn{display:flex;align-items:center;gap:5px;background:none;border:none;color:var(--text3);font-size:12px;font-weight:600;cursor:pointer;transition:0.2s;padding:4px 8px;border-radius:8px;}
@@ -222,7 +222,7 @@ input,select{font-family:inherit}
 .comp-card{background:var(--bg2);border-radius:var(--radius);border:1px solid rgba(255,255,255,0.05);margin-bottom:14px;overflow:hidden;transition:0.2s;}
 .comp-card-header{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid rgba(255,255,255,0.04);}
 .comp-style-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.comp-style-label{font-size:15px;font-weight:800;color:#fff;}
+.comp-style-label{font-size:15px;font-weight:800;color:var(--text);}
 .comp-style-desc{font-size:11px;color:var(--text3);margin-top:1px;}
 .comp-brawlers{display:flex;gap:8px;padding:12px 14px 4px;}
 .comp-brawler-slot{flex:1;background:var(--bg3);border-radius:var(--radius2);padding:10px 8px;text-align:center;border:1px solid rgba(255,255,255,0.04);min-width:0;}
@@ -290,6 +290,16 @@ body.light .dq-option:hover{background:#c4c8d4;border-color:var(--accent);}
 body.light .welcome-name,body.light .welcome-tag{color:#0f0f1a!important;}
 body.light .page-title{color:#0f0f1a;}
 body.light h2,body.light h3{color:#0f0f1a;}
+body.light .trophy-chart-card{background:var(--bg2);border-color:rgba(0,0,0,0.1);}
+body.light .trophy-chart-tabs{background:var(--bg3);}
+body.light .trophy-bar-zero{background:rgba(0,0,0,0.12);}
+body.light .collapsible-card{background:var(--bg2);border-color:rgba(0,0,0,0.1);}
+body.light .collapsible-header:hover{background:rgba(0,0,0,0.04);}
+body.light .collapsible-toggle{background:var(--bg3);border-color:rgba(0,0,0,0.1);color:#2d2d4a;}
+body.light .collapsible-card.open .collapsible-toggle{background:rgba(109,40,217,0.1);color:var(--accent);border-color:var(--accent);}
+body.light .comp-style-label{color:var(--text)!important;}
+body.light .search-wrap input{color:var(--text);}
+body.light .logo{color:var(--text)!important;}
 /* Theme toggle */
 .theme-toggle{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:1px solid var(--bg4);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:0.2s;flex-shrink:0;font-size:16px;line-height:1;}
 .theme-toggle:hover{background:var(--bg4);color:var(--text);}
@@ -306,14 +316,14 @@ body.light h2,body.light h3{color:#0f0f1a;}
 .welcome-bar{background:linear-gradient(145deg,var(--bg2),var(--bg3));border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;border:1px solid rgba(139,92,246,0.1);display:flex;align-items:center;gap:14px;}
 .welcome-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--blue));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;flex-shrink:0;}
 .welcome-info{flex:1;}
-.welcome-name{font-size:17px;font-weight:800;color:#fff;}
+.welcome-name{font-size:17px;font-weight:800;color:var(--text);}
 .welcome-tag{font-size:12px;color:var(--text3);margin-top:2px;}
 .welcome-trophies{font-size:18px;font-weight:800;color:var(--accent);}
 
 /* Trophy Chart Styles */
 .trophy-chart-card{background:var(--bg2);border-radius:var(--radius);border:1px solid rgba(255,255,255,0.05);padding:18px 16px;margin-bottom:14px;}
 .trophy-chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.trophy-chart-title{font-size:15px;font-weight:800;color:#fff;}
+.trophy-chart-title{font-size:15px;font-weight:800;color:var(--text);}
 .trophy-chart-tabs{display:flex;gap:4px;background:var(--bg3);border-radius:10px;padding:3px;}
 .trophy-chart-tab{padding:5px 12px;border-radius:8px;font-size:11px;font-weight:700;color:var(--text3);cursor:pointer;transition:0.2s;border:none;background:transparent;}
 .trophy-chart-tab.active{background:var(--accent);color:#fff;}
@@ -343,11 +353,11 @@ body.light h2,body.light h3{color:#0f0f1a;}
 /* Daily Quiz */
 .daily-quiz{background:var(--bg2);border-radius:var(--radius);border:1px solid rgba(255,255,255,0.05);padding:18px 16px;margin-bottom:20px;animation:fadeIn .3s ease;}
 .daily-quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.daily-quiz-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:#fff;}
+.daily-quiz-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:var(--text);}
 .daily-quiz-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;background:rgba(249,115,22,0.15);color:var(--orange);text-transform:uppercase;letter-spacing:0.5px;}
 .daily-quiz-timer{font-size:11px;font-weight:600;color:var(--text3);display:flex;align-items:center;gap:4px;}
 .daily-quiz-timer svg{width:12px;height:12px;}
-.dq-question{font-size:14px;font-weight:700;color:#fff;line-height:1.55;margin-bottom:14px;}
+.dq-question{font-size:14px;font-weight:700;color:var(--text);line-height:1.55;margin-bottom:14px;}
 .dq-hint{font-size:11px;color:var(--text3);margin-bottom:12px;font-style:italic;}
 .dq-options{display:flex;flex-direction:column;gap:8px;}
 .dq-option{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--radius2);background:var(--bg3);border:1.5px solid rgba(255,255,255,0.06);cursor:pointer;transition:all 0.2s;user-select:none;}
@@ -391,7 +401,7 @@ body.light h2,body.light h3{color:#0f0f1a;}
 <div id="main-app" style="display:none;">
   <header class="header">
     <div class="header-top">
-      <div class="logo" onclick="go('home')">in<span style="color:var(--accent)">B</span></div>
+      <div class="logo" onclick="go('home')">in<span style="color:var(--accent)">B</span><span id="app-version-badge" style="font-size:10px;font-weight:600;color:var(--text3);margin-left:6px;letter-spacing:0;align-self:center;"></span></div>
       <div style="display:flex;gap:8px;align-items:center;">
         <span id="header-player-name" style="font-size:13px;color:var(--text2);font-weight:600;"></span>
         <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
@@ -420,7 +430,7 @@ body.light h2,body.light h3{color:#0f0f1a;}
 
   <div class="page active" id="page-home">
     <div id="home-welcome-bar" style="display:none;"></div>
-    <h3 style="font-size:20px;font-weight:800;margin:8px 0 14px;color:#fff;">Quick Access</h3>
+    <h3 style="font-size:20px;font-weight:800;margin:8px 0 14px;color:var(--text);">Quick Access</h3>
     <div class="quick-access-grid animate-in">
       <div class="qa-card" onclick="go('pairs')">
         <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
@@ -460,7 +470,7 @@ body.light h2,body.light h3{color:#0f0f1a;}
 
   <div class="page" id="page-connect">
     <div class="card animate-in" style="margin-top:12px;text-align:center;">
-      <h2 style="font-size:24px;font-weight:900;margin-bottom:8px;color:#fff;">Connect Account</h2>
+      <h2 style="font-size:24px;font-weight:900;margin-bottom:8px;color:var(--text);">Connect Account</h2>
       <p style="color:var(--text2);font-size:14px;margin-bottom:20px;">Enter your player tag to unlock your personalized dashboard.</p>
       <div class="input-wrap" style="margin-bottom:16px;text-align:left;">
         <label>Player Tag</label>
@@ -477,7 +487,7 @@ body.light h2,body.light h3{color:#0f0f1a;}
   <div class="page" id="page-brawlers">
     <div class="animate-in">
       <div style="margin-bottom:18px;margin-top:8px;">
-        <h2 style="font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;">Brawler Analyzer</h2>
+        <h2 style="font-size:26px;font-weight:900;color:var(--text);letter-spacing:-0.5px;">Brawler Analyzer</h2>
         <p style="color:var(--text2);font-size:14px;margin-top:4px;">Deep dive into any brawler's competitive meta</p>
       </div>
       <div class="search-wrap">
@@ -491,7 +501,7 @@ body.light h2,body.light h3{color:#0f0f1a;}
 
   <div class="page" id="page-pairs">
     <div style="margin-bottom:18px;margin-top:8px;">
-      <h2 style="font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;">Team Compositions</h2>
+      <h2 style="font-size:26px;font-weight:900;color:var(--text);letter-spacing:-0.5px;">Team Compositions</h2>
       <p style="color:var(--text2);font-size:14px;margin-top:4px;">Pro-meta team comps for each active map</p>
     </div>
     <div class="comp-select-row">
@@ -514,7 +524,7 @@ body.light h2,body.light h3{color:#0f0f1a;}
 
   <div class="page" id="page-battlelog">
     <div style="margin-bottom:18px;margin-top:8px;">
-      <h2 style="font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;">Battle Log</h2>
+      <h2 style="font-size:26px;font-weight:900;color:var(--text);letter-spacing:-0.5px;">Battle Log</h2>
       <p style="color:var(--text2);font-size:14px;margin-top:4px;">Full history stored from the moment you joined</p>
     </div>
     <div id="battlelog-content">
@@ -530,6 +540,11 @@ body.light h2,body.light h3{color:#0f0f1a;}
   </div>
 </div>
 <script>
+// ── App Version ───────────────────────────────────────────────────────────────
+// Update this string on every release. It appears next to the logo in the header.
+const APP_VERSION = '1.0.0';
+(function(){ const el=document.getElementById('app-version-badge'); if(el) el.textContent='v'+APP_VERSION; })();
+
 const BRAWLER_COLORS={"Shelly":"#e88a5a","Nita":"#d45b5b","Colt":"#4b9cd4","Bull":"#c55a3e","Brock":"#e8c248","El Primo":"#4caf50","Barley":"#a855f7","Poco":"#06b6d4","Rosa":"#22c55e","Jessie":"#f97316","Dynamike":"#ef4444","Tick":"#3b82f6","8-Bit":"#8b5cf6","Rico":"#ec4899","Penny":"#f59e0b","Darryl":"#6b7280","Carl":"#a3e635","Piper":"#f0abfc","Pam":"#f472b6","Frank":"#78716c","Bibi":"#f43f5e","Bea":"#facc15","Edgar":"#7c3aed","Griff":"#d97706","Grom":"#64748b","Bonnie":"#e879f9","Gale":"#38bdf8","Colette":"#c084fc","Belle":"#fbbf24","Ash":"#a8a29e","Leon":"#34d399","Spike":"#4ade80","Crow":"#334155","Sandy":"#fde068","Amber":"#ea580c","Meg":"#818cf8","Surge":"#22d3ee","Lou":"#bae6fd","Byron":"#8b5cf6","Squeak":"#86efac","Buzz":"#f97316","Fang":"#dc2626","Eve":"#fda4af","Janet":"#e879f9","Otis":"#6366f1","Sam":"#b91c1c","Gus":"#c4b5fd","Buster":"#3b82f6","Chester":"#facc15","Gray":"#94a3b8","Mandy":"#f9a8d4","R-T":"#60a5fa","Willow":"#a78bfa","Doug":"#fb923c","Chuck":"#dc2626","Charlie":"#7c3aed","Mico":"#a3e635","Melodie":"#f472b6","Lily":"#e879f9","Angelo":"#fde068","Berry":"#818cf8","Shade":"#475569","Draco":"#ef4444","Kenji":"#dc2626","Juju":"#c084fc","Moe":"#64748b","Clancy":"#ef4444","Tara":"#9333ea","Mortis":"#7c3aed","Gene":"#3b82f6","Mr. P":"#60a5fa","Max":"#facc15","Sprout":"#4ade80","Nani":"#f472b6","Emz":"#c084fc","Stu":"#f97316","Ruffs":"#d97706","Lola":"#ec4899","Pierce":"#10b981","Sirius":"#4c1d95","Cordelius":"#7c2d12","Glowy":"#fef08a","Hank":"#60a5fa","Kit":"#fca5a5","Larry & Lawrie":"#6ee7b7","Maisie":"#c084fc","Pearl":"#fb7185","Bo":"#a3e635","Jacky":"#facc15","Finx":"#a855f7",
 "Gigi":"#ec4899",
 "Ziggy":"#3b82f6",
@@ -1339,7 +1354,7 @@ function toggleCollapsible(id){document.getElementById(id).classList.toggle('ope
 
 function buildProfile(){
   const d=playerData,el=document.getElementById('profile-content');
-  if(isSampleData){el.innerHTML=`<div class="card animate-in" style="text-align:center;padding:40px 20px;"><h3 style="font-size:20px;font-weight:800;color:#fff;margin-bottom:12px;">Guest Mode</h3><p style="color:var(--text2);font-size:14px;margin-bottom:24px;line-height:1.6;">Connect your Brawl Stars account to view your personal stats, brawler progress, and detailed win rates.</p><button class="btn btn-primary" onclick="go('connect')">Connect Account</button></div>`;return;}
+  if(isSampleData){el.innerHTML=`<div class="card animate-in" style="text-align:center;padding:40px 20px;"><h3 style="font-size:20px;font-weight:800;color:var(--text);margin-bottom:12px;">Guest Mode</h3><p style="color:var(--text2);font-size:14px;margin-bottom:24px;line-height:1.6;">Connect your Brawl Stars account to view your personal stats, brawler progress, and detailed win rates.</p><button class="btn btn-primary" onclick="go('connect')">Connect Account</button></div>`;return;}
   const top5=[...d.brawlers].sort((a,b)=>b.trophies-a.trophies).slice(0,5);const bot5=[...d.brawlers].sort((a,b)=>a.trophies-b.trophies).slice(0,5);const str5=[...d.brawlers].sort((a,b)=>getBrawlerStrength(b)-getBrawlerStrength(a)).slice(0,5);const mx=top5[0]?.trophies||1;
   el.innerHTML=`<div class="card animate-in"><div style="text-align:center;margin-bottom:10px"><div style="font-size:24px;font-weight:900">${d.name}</div><div style="font-size:13px;color:var(--text2)">${d.tag}</div></div><div class="stat-row"><div class="stat-box"><div class="val" style="color:var(--accent)">${d.trophies.toLocaleString()}</div><div class="lbl">Total Trophies</div></div><div class="stat-box"><div class="val" style="color:var(--purple)">${d.brawlers.length}</div><div class="lbl">Brawlers Unlocked</div></div><div class="stat-box"><div class="val" style="color:var(--green)">${top5[0]?.trophies||0}</div><div class="lbl">Highest Brawler</div></div><div class="stat-box"><div class="val" style="color:var(--cyan)">${Math.round(d.trophies/d.brawlers.length)}</div><div class="lbl">Avg per Brawler</div></div></div></div>
 <div class="trophy-chart-card animate-in" id="trophy-chart-container"></div>
@@ -1539,7 +1554,7 @@ function showTeamComps(){
     const comp=comps[style];const cs=COMP_STYLES[style];
     const brawlersHtml=comp.brawlers.map(b=>{const c=BRAWLER_COLORS[b.name]||'#8b5cf6';const rc=style==='Aggressive'?'#ef4444':style==='Balanced'?'#3b82f6':'#10b981';return `<div class="comp-brawler-slot"><div class="comp-brawler-circle" style="background:${c}18;color:${c};">${b.name.charAt(0)}</div><div class="comp-brawler-name">${b.name}</div><div class="comp-brawler-role" style="background:${rc}15;color:${rc}">${b.role}</div>${getBrawlerAbilitiesHtml(b.name)}</div>`;}).join('');
     const cid=`comp-strat-${style.toLowerCase()}`;
-    return `<div class="comp-card"><div class="comp-card-header"><div class="comp-style-icon" style="background:${cs.bg}">${cs.icon}</div><div><div class="comp-style-label" style="color:${cs.color}">${style}</div><div class="comp-style-desc">${cs.desc}</div></div></div><div class="comp-brawlers">${brawlersHtml}</div><div class="comp-footer"><button class="view-strategy-btn" onclick="toggleStrategy('${cid}',this)">View Strategy <span style="font-size:14px;">→</span></button></div><div class="comp-strategy-panel" id="${cid}"><div class="modal-section-title" style="margin-bottom:6px;">Strategy for ${map}</div><p>${comp.desc}</p><div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">${comp.brawlers.map(b=>{const c=BRAWLER_COLORS[b.name]||'#8b5cf6';return `<div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:24px;height:24px;border-radius:50%;background:${c}18;color:${c};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;flex-shrink:0">${b.name.charAt(0)}</div><span style="font-weight:700;color:#fff;">${b.name}</span><span style="color:var(--text3)">·</span><span style="color:var(--text2)">${b.tip}</span></div>`;}).join('')}</div></div></div>`;
+    return `<div class="comp-card"><div class="comp-card-header"><div class="comp-style-icon" style="background:${cs.bg}">${cs.icon}</div><div><div class="comp-style-label" style="color:${cs.color}">${style}</div><div class="comp-style-desc">${cs.desc}</div></div></div><div class="comp-brawlers">${brawlersHtml}</div><div class="comp-footer"><button class="view-strategy-btn" onclick="toggleStrategy('${cid}',this)">View Strategy <span style="font-size:14px;">→</span></button></div><div class="comp-strategy-panel" id="${cid}"><div class="modal-section-title" style="margin-bottom:6px;">Strategy for ${map}</div><p>${comp.desc}</p><div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">${comp.brawlers.map(b=>{const c=BRAWLER_COLORS[b.name]||'#8b5cf6';return `<div style="display:flex;align-items:center;gap:8px;font-size:12px;"><div style="width:24px;height:24px;border-radius:50%;background:${c}18;color:${c};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;flex-shrink:0">${b.name.charAt(0)}</div><span style="font-weight:700;color:var(--text);">${b.name}</span><span style="color:var(--text3)">·</span><span style="color:var(--text2)">${b.tip}</span></div>`;}).join('')}</div></div></div>`;
   }).join('');
 }
 function toggleStrategy(id,btn){const panel=document.getElementById(id);const isOpen=panel.classList.toggle('open');btn.innerHTML=isOpen?'Hide Strategy <span style="font-size:14px;">↑</span>':'View Strategy <span style="font-size:14px;">→</span>';}
