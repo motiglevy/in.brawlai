@@ -663,8 +663,14 @@ async function fetchPlayer(tag){
     return{name:d.name,tag:d.tag,trophies:d.trophies,highestTrophies:d.highestTrophies,
       brawlers:d.brawlers.map((b,i)=>{const nm=normName(b.name);return{name:nm,trophies:b.trophies,power:b.power,winRate:b.winRate||(Math.floor(Math.random()*25)+45),rank:b.rank||i+1,color:BRAWLER_COLORS[nm]||'#666'};}),
       isSample:false,fromCache:!!fromCache};}
-  // 1. Try local proxy
-  try{const r=await fetch(`${PROXY_BASE}/api/player/${encodeURIComponent(ct)}`,{signal:AbortSignal.timeout(10000)});if(r.ok){const d=await r.json();const res=buildResult(d,false);try{localStorage.setItem(cacheKey,JSON.stringify(res));}catch(e){}return res;}}catch(e){console.warn('Backend unreachable:',e.message);}
+  // 1. Try local proxy (35 s timeout — allows for Render cold-start wake-up)
+  try{const r=await fetch(`${PROXY_BASE}/api/player/${encodeURIComponent(ct)}`,{signal:AbortSignal.timeout(35000)});
+    if(r.ok){const d=await r.json();const res=buildResult(d,false);try{localStorage.setItem(cacheKey,JSON.stringify(res));}catch(e){}return res;}
+    // Surface API errors so the user knows what went wrong
+    console.warn('Player API error:',r.status);
+    try{const body=await r.json();return{_error:true,status:r.status,message:body.reason||body.message||('API error '+r.status)};}catch(_){}
+    return{_error:true,status:r.status,message:'API error '+r.status};
+  }catch(e){console.warn('Backend unreachable:',e.message);}
   // Fall back to localStorage cache
   try{const cached=localStorage.getItem(cacheKey);if(cached){const d=JSON.parse(cached);d.fromCache=true;return d;}}catch(e){}
   return null;
@@ -709,10 +715,30 @@ function validateTag(raw){let t=raw.trim().toUpperCase().replace(/\s/g,'');if(!t
 async function handleLogin(){
   const input=document.getElementById('login-tag-input').value;const err=document.getElementById('login-error');err.style.display='none';
   const tag=validateTag(input);if(!tag){err.textContent='Invalid tag format. Tags are letters and numbers only (e.g. #2YQ8RJLP0).';err.style.display='block';return;}
-  const btn=document.getElementById('login-btn');btn.innerHTML='<div class="spinner" style="width:20px;height:20px;margin:0 auto;border-width:2px;border-top-color:#fff"></div>';btn.disabled=true;
-  const data=await fetchPlayer(tag);btn.innerHTML='<span id="login-btn-text">Sign In</span>';btn.disabled=false;
-  if(data){playerData=data;isSampleData=false;savedTag='#'+tag;try{localStorage.setItem('brawl_tag',savedTag);localStorage.setItem('brawl_name',data.name);}catch(e){}registerWithDB(tag);enterApp();}
-  else{err.textContent='Could not connect to server. Check your tag and ensure the server is running (node server.js).';err.style.display='block';}
+  const btn=document.getElementById('login-btn');
+  btn.innerHTML='<div class="spinner" style="width:20px;height:20px;margin:0 auto;border-width:2px;border-top-color:#fff"></div>';
+  btn.disabled=true;
+  err.textContent='';err.style.display='none';
+  // Show a "waking up" hint after 5 s in case the server is cold-starting
+  const wakeHint=setTimeout(()=>{err.textContent='⏳ Server is waking up — this can take up to 30 seconds on first load…';err.style.display='block';err.style.color='var(--text2)';err.style.background='none';err.style.border='none';},5000);
+  const data=await fetchPlayer(tag);
+  clearTimeout(wakeHint);
+  btn.innerHTML='<span id="login-btn-text">Sign In</span>';btn.disabled=false;
+  if(data&&!data._error){
+    playerData=data;isSampleData=false;savedTag='#'+tag;
+    try{localStorage.setItem('brawl_tag',savedTag);localStorage.setItem('brawl_name',data.name);}catch(e){}
+    registerWithDB(tag);enterApp();
+  } else {
+    err.style.color='';err.style.background='';err.style.border='';
+    if(data&&data._error){
+      if(data.status===404) err.textContent='Player tag not found. Double-check it in Brawl Stars (profile icon → tag starting with #).';
+      else if(data.status===403||data.status===401) err.textContent='Server API key issue — please contact the app admin.';
+      else err.textContent='Server error ('+data.status+'). Try again in a moment.';
+    } else {
+      err.textContent='Server did not respond in time. It may be starting up — wait 30 seconds and try again.';
+    }
+    err.style.display='block';
+  }
 }
 function handleGuestLogin(){playerData=getSamplePlayer();isSampleData=true;savedTag=null;enterApp();}
 function handleSignOut(){try{if(savedTag)localStorage.removeItem('brawl_data_'+savedTag.replace('#',''));localStorage.removeItem('brawl_tag');localStorage.removeItem('brawl_name');localStorage.removeItem('brawl_rotation');}catch(e){}playerData=null;isSampleData=false;savedTag=null;document.getElementById('main-app').style.display='none';document.getElementById('login-page').style.display='flex';document.getElementById('login-tag-input').value='';document.getElementById('login-error').style.display='none';}

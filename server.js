@@ -229,12 +229,20 @@ async function runPoller() {
 // ── Boot ──────────────────────────────────────────────────────────────────────
 
 async function start() {
-  // Initialise DB schema (creates tables if they don't exist)
-  await db.initSchema();
+  // Try to initialise DB schema — non-fatal if DB is temporarily unreachable.
+  // Player lookups will still work; battle log features degrade gracefully.
+  let dbReady = false;
+  try {
+    await db.initSchema();
+    dbReady = true;
+  } catch (err) {
+    console.error('[DB] Schema init failed — battle log unavailable until DB recovers:', err.message);
+  }
 
   server.listen(PORT, () => {
-    console.log(`\n  Brawl Coach server running at http://localhost:${PORT}`);
-    console.log(`  API key loaded (${BRAWL_TOKEN.slice(0, 8)}...)\n`);
+    console.log(`\n  inB server running at http://localhost:${PORT}`);
+    console.log(`  API key loaded (${BRAWL_TOKEN.slice(0, 8)}...)`);
+    console.log(`  DB ready: ${dbReady}\n`);
     console.log(`  Endpoints:`);
     console.log(`    GET  /                         → Frontend`);
     console.log(`    GET  /api/player/:tag           → Player profile`);
@@ -243,9 +251,24 @@ async function start() {
     console.log(`    GET  /api/battlelog/:tag        → Full stored battle log\n`);
   });
 
-  // First poll 5 s after boot, then every 30 min
-  setTimeout(runPoller, 5000);
-  setInterval(runPoller, POLL_INTERVAL_MS);
+  // Only start the poller if the DB came up
+  if (dbReady) {
+    setTimeout(runPoller, 5000);
+    setInterval(runPoller, POLL_INTERVAL_MS);
+  } else {
+    // Retry DB init every 2 minutes in case it was a transient failure
+    const retryInterval = setInterval(async () => {
+      try {
+        await db.initSchema();
+        console.log('[DB] Reconnected successfully — starting poller.');
+        clearInterval(retryInterval);
+        setTimeout(runPoller, 1000);
+        setInterval(runPoller, POLL_INTERVAL_MS);
+      } catch (e) {
+        console.warn('[DB] Retry failed:', e.message);
+      }
+    }, 2 * 60 * 1000);
+  }
 }
 
 start().catch((err) => {
