@@ -1595,6 +1595,10 @@ window.onload = async function () {
       document.getElementById('header-connect-btn').style.display = 'none';
       document.getElementById('signout-btn').style.display = 'inline-block';
 
+      // Register with DB on every page load so the poller tracks this player
+      // and the initial 25 battles are synced immediately. Fire-and-forget.
+      registerWithDB(storedTag.replace('#', ''));
+
       initApp(true);
     } else {
       document.getElementById('header-player-name').textContent =
