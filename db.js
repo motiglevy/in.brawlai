@@ -135,6 +135,7 @@ async function getBattles(playerTag, limit = 500) {
       brawler_name,
       brawler_power,
       trophies_change,
+      raw_json->'battle'->>'type' AS battle_type,
       raw_json
     FROM battles
     WHERE player_tag = $1
