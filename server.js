@@ -25,8 +25,11 @@ function normalizeTag(raw) {
 
 function brawlApiFetch(apiPath) {
   return new Promise((resolve, reject) => {
+    // Using RoyaleAPI proxy so we don't need to whitelist Render's rotating
+    // outbound IPs. Only the single proxy IP (45.79.218.79) needs whitelisting
+    // on the Brawl Stars API key.
     const opts = {
-      hostname: 'api.brawlstars.com',
+      hostname: 'bsproxy.royaleapi.dev',
       path: apiPath,
       method: 'GET',
       headers: {
