@@ -4,24 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>in.brawlai — AI-Powered Brawl Stars Coach & Team Builder</title>
-<meta name="description" content="Get pro-level team comps, brawler analysis, trophy tracking, and live map rotation picks — all powered by AI. Connect your Brawl Stars account for personalized stats and strategy tips from top players.">
-<meta name="keywords" content="Brawl Stars, team comp, brawler tier list, trophy tracker, meta guide, strategy, coach, AI">
+<meta name="description" content="Free AI-powered Brawl Stars companion. Get pro team compositions, live map rotation, trophy tracking, brawler tier lists, and personalized stats — connect your account for instant coaching.">
+<meta name="keywords" content="Brawl Stars coach, Brawl Stars team comp, brawler tier list, trophy tracker, Brawl Stars AI, map rotation, Brawl Stars stats, pro picks, brawler guide, Brawl Stars meta">
 <meta name="author" content="in.brawlai">
+<meta name="robots" content="index, follow">
+<meta name="language" content="English">
 
-<!-- Open Graph (Facebook, Discord, iMessage, etc.) -->
+<!-- Canonical URL -->
+<link rel="canonical" href="https://inbrawlai.com">
+
+<!-- Open Graph (Facebook, Discord, iMessage, LinkedIn) -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://inbrawlai.onrender.com">
+<meta property="og:url" content="https://inbrawlai.com">
 <meta property="og:title" content="in.brawlai — AI-Powered Brawl Stars Coach & Team Builder">
-<meta property="og:description" content="Pro team comps, brawler analysis, trophy tracking, and live map rotation picks. Connect your account for personalized stats and strategy tips.">
+<meta property="og:description" content="Free AI-powered Brawl Stars companion. Pro team comps, live map rotation, trophy tracking, and personalized stats. Connect your account for instant coaching.">
 <meta property="og:site_name" content="in.brawlai">
+<meta property="og:locale" content="en_US">
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@inbrawlai">
 <meta name="twitter:title" content="in.brawlai — AI-Powered Brawl Stars Coach & Team Builder">
-<meta name="twitter:description" content="Pro team comps, brawler analysis, trophy tracking, and live map rotation picks. Connect your account for personalized stats and strategy tips.">
+<meta name="twitter:description" content="Free AI-powered Brawl Stars companion. Pro team comps, live map rotation, trophy tracking, and personalized stats.">
 
 <!-- Theme color for mobile browsers -->
 <meta name="theme-color" content="#090914">
+
+<!-- Schema.org JSON-LD structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "in.brawlai",
+  "url": "https://inbrawlai.com",
+  "description": "Free AI-powered Brawl Stars companion app. Get pro team compositions, live map rotation, trophy tracking, brawler tier lists, and personalized player stats.",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Live map rotation with pro brawler picks",
+    "AI-powered team composition builder",
+    "Trophy history tracking and charts",
+    "Ranked (Elo) battle log",
+    "Brawler tier list and meta guide",
+    "Daily quiz and strategy tips",
+    "Personal player stats via Brawl Stars API"
+  ],
+  "keywords": "Brawl Stars, coach, team comp, trophy tracker, tier list, map rotation, ranked, elo, stats",
+  "author": {
+    "@type": "Organization",
+    "name": "in.brawlai",
+    "url": "https://inbrawlai.com"
+  }
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root {
@@ -549,7 +592,7 @@ body.light .logo{color:var(--text)!important;}
 <script>
 // ── App Version ───────────────────────────────────────────────────────────────
 // Update this string on every release. It appears next to the logo in the header.
-const APP_VERSION = '1.3.0';
+const APP_VERSION = '1.4.0';
 (function(){ const el=document.getElementById('app-version-badge'); if(el) el.textContent='v'+APP_VERSION; })();
 
 const BRAWLER_COLORS={"Shelly":"#e88a5a","Nita":"#d45b5b","Colt":"#4b9cd4","Bull":"#c55a3e","Brock":"#e8c248","El Primo":"#4caf50","Barley":"#a855f7","Poco":"#06b6d4","Rosa":"#22c55e","Jessie":"#f97316","Dynamike":"#ef4444","Tick":"#3b82f6","8-Bit":"#8b5cf6","Rico":"#ec4899","Penny":"#f59e0b","Darryl":"#6b7280","Carl":"#a3e635","Piper":"#f0abfc","Pam":"#f472b6","Frank":"#78716c","Bibi":"#f43f5e","Bea":"#facc15","Edgar":"#7c3aed","Griff":"#d97706","Grom":"#64748b","Bonnie":"#e879f9","Gale":"#38bdf8","Colette":"#c084fc","Belle":"#fbbf24","Ash":"#a8a29e","Leon":"#34d399","Spike":"#4ade80","Crow":"#334155","Sandy":"#fde068","Amber":"#ea580c","Meg":"#818cf8","Surge":"#22d3ee","Lou":"#bae6fd","Byron":"#8b5cf6","Squeak":"#86efac","Buzz":"#f97316","Fang":"#dc2626","Eve":"#fda4af","Janet":"#e879f9","Otis":"#6366f1","Sam":"#b91c1c","Gus":"#c4b5fd","Buster":"#3b82f6","Chester":"#facc15","Gray":"#94a3b8","Mandy":"#f9a8d4","R-T":"#60a5fa","Willow":"#a78bfa","Doug":"#fb923c","Chuck":"#dc2626","Charlie":"#7c3aed","Mico":"#a3e635","Melodie":"#f472b6","Lily":"#e879f9","Angelo":"#fde068","Berry":"#818cf8","Shade":"#475569","Draco":"#ef4444","Kenji":"#dc2626","Juju":"#c084fc","Moe":"#64748b","Clancy":"#ef4444","Tara":"#9333ea","Mortis":"#7c3aed","Gene":"#3b82f6","Mr. P":"#60a5fa","Max":"#facc15","Sprout":"#4ade80","Nani":"#f472b6","Emz":"#c084fc","Stu":"#f97316","Ruffs":"#d97706","Lola":"#ec4899","Pierce":"#10b981","Sirius":"#4c1d95","Cordelius":"#7c2d12","Glowy":"#fef08a","Hank":"#60a5fa","Kit":"#fca5a5","Larry & Lawrie":"#6ee7b7","Maisie":"#c084fc","Pearl":"#fb7185","Bo":"#a3e635","Jacky":"#facc15","Finx":"#a855f7",
@@ -1289,8 +1332,8 @@ function blRender(){
   const totalTC=modeFiltered.reduce((s,b)=>s+(typeof b.trophies_change==='number'?b.trophies_change:0),0);
   const tcStr=(totalTC>=0?'+':'')+totalTC;
   const isRanked=_blMode==='ranked';
-  const changeLabel=isRanked?'RP Change':'Trophy Δ';
-  const changeSuffix=isRanked?'RP':'🏆';
+  const changeLabel=isRanked?'Elo Change':'Trophy Δ';
+  const changeSuffix=isRanked?'Elo':'🏆';
 
   // Update stats card
   const statsEl=document.getElementById('bl-stats');

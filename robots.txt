@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://inbrawlai.com/sitemap.xml
+
+# Don't crawl API endpoints
+Disallow: /api/
