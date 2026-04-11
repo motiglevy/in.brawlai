@@ -89,6 +89,17 @@ async function handleBrawlers(res) {
   }
 }
 
+async function handleEvents(res) {
+  try {
+    const result = await brawlApiFetch('/v1/events/rotation');
+    cors(res);
+    res.writeHead(result.status, { 'Content-Type': 'application/json' });
+    res.end(result.body);
+  } catch (err) {
+    json(res, 502, { error: 'Failed to reach Brawl Stars API.', detail: err.message });
+  }
+}
+
 // ── Battle log sync (shared by poller + register) ─────────────────────────────
 
 async function syncPlayerBattles(tag) {
@@ -167,6 +178,9 @@ function serveStatic(res, filePath) {
     '.json': 'application/json',
     '.png':  'image/png',
     '.svg':  'image/svg+xml',
+    '.txt':  'text/plain',
+    '.xml':  'application/xml',
+    '.ico':  'image/x-icon',
   };
   const contentType = types[ext] || 'application/octet-stream';
   fs.readFile(filePath, (err, data) => {
@@ -192,6 +206,8 @@ const server = http.createServer(async (req, res) => {
   if (playerMatch && req.method === 'GET') return handlePlayer(res, playerMatch[1]);
 
   if (url.pathname === '/api/brawlers' && req.method === 'GET') return handleBrawlers(res);
+
+  if (url.pathname === '/api/events' && req.method === 'GET') return handleEvents(res);
 
   // New battle log endpoints
   const registerMatch   = url.pathname.match(/^\/api\/register\/(.+)$/);
